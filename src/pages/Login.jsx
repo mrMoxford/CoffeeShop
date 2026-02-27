@@ -94,7 +94,7 @@ const Login = () => {
     dispatch(login({ username, password }));
   };
 
-  if (isLoading) {
+  if (isFetching) {
     return <Spinner />;
   }
 
@@ -112,7 +112,7 @@ const Login = () => {
             placeholder="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          {isError && <Message>Something went wrong</Message>}
+          {error && <Message>Something went wrong</Message>}
           <Button className="login">Log In</Button>
           <ALink className="forgotten-password">Forgot your password?</ALink>
           <ALink to="/signup" className="signup">

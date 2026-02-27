@@ -3,7 +3,40 @@ import styled from "styled-components";
 import HeroVideo from "../assets/videos/bgVid.mp4";
 import HeroPoster from "../assets/CoffeeImgs/HeroPoster.jpg";
 import { tabletDevice } from "../Responsive";
+const Container = styled.header`
+  width: 100%;
+  height: 100vh;
+  position: relative;
+`;
+const Content = styled.div`
+  position: absolute;
+  padding: 2rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  pointer-events: none;
+  inset: 0;
+  ${tabletDevice({
+    background: "hsla(0, 0%, 0%, 0.3)",
+  })};
+`;
+const HeaderTitle = styled.h1`
+  font-size: 4rem;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  color: white;
+  ${tabletDevice({
+    fontSize: "3rem",
+  })};
+`;
 
+const Span = styled.span`
+  color: red;
+`;
 const Video = styled.video`
   width: 100%;
   height: 100%;

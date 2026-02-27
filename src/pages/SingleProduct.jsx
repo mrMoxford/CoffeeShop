@@ -18,6 +18,7 @@ const Container = styled.div`
   background: hsla(0, 0%, 85%, 0.5);
   ${smallDevice({ padding: "1rem" })};
 `;
+
 const Wrapper = styled.div`
   flex: 1;
   margin-top: 5rem;
@@ -25,16 +26,16 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-
   ${tabletDevice({ flexDirection: "column-reverse" })};
 `;
+
 const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   flex: 1;
-
   ${tabletDevice({ marginBottom: "2rem" })};
 `;
+
 const ProductInfo = styled.ul`
   display: flex;
   flex: 1;
@@ -46,19 +47,22 @@ const ProductInfo = styled.ul`
   list-style: none;
   ${tabletDevice({ padding: "0" })};
 `;
+
 const Selects = styled.div`
   display: flex;
-
   justify-content: space-between;
   align-items: center;
   width: 100%;
   ${smallDevice({ flexDirection: "column", alignItems: "flex-start" })};
 `;
+
 const Image = styled.img``;
+
 const Name = styled.h1`
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 200;
 `;
+
 const Brand = styled.li``;
 const Region = styled.li``;
 const Country = styled.li``;
@@ -74,6 +78,7 @@ const Price = styled.p`
   justify-content: flex-start;
   font-size: 2rem;
 `;
+
 const Button = styled.button`
   padding: 1rem;
   font-weight: 500;
@@ -86,15 +91,18 @@ const Button = styled.button`
     background-color: hsla(360, 65%, 20%, 1);
     color: white;
   }
-  ${smallDevice({ width: "100%;" })};
+  ${smallDevice({ width: "100%" })};
 `;
+
 const SingleProduct = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
   const dispatch = useDispatch();
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector((state) => state.cart);
+
   useEffect(() => {
     dispatch(getTotals());
   }, [cart, dispatch]);
@@ -102,57 +110,60 @@ const SingleProduct = () => {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const res = await publicRequest.get("/products/find/" + id);
-        setProduct(res.data);
+        const res = await publicRequest.get(`/products/find/${id}`);
+
+        // API returns { success: true, data: {...} }
+        setProduct(res.data.data);
         setIsLoading(false);
       } catch (err) {
         console.error(err);
+        setIsLoading(false);
       }
     };
+
     getProduct();
   }, [id]);
 
-  const handleClick = product => {
-    dispatch(addToCart({ ...product }));
+  const handleClick = (product) => {
+    if (product) {
+      dispatch(addToCart({ ...product }));
+    }
   };
+
+  if (isLoading) return <Spinner />;
+
+  if (!product) return <p>Product not found.</p>;
+
   return (
     <Container>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <Wrapper>
-          <ProductInfo>
-            <Name>{product.name}</Name>
-            <Brand>
-              <b>Brand:</b> {product.brand}
-            </Brand>
-            <Region>
-              <b> Region:</b> {product.region}
-            </Region>
-            <Country>
-              <b>Origin:</b> {product.country}
-            </Country>
-            <RoastLevel>
-              <b>Roast Level:</b> {product.roastLevel}
-            </RoastLevel>
-            <FlavourProfile>
-              <b>Flavour Profile:</b> {product.flavourProfile}
-            </FlavourProfile>
-            <Selects>
-              <Price>¥{product.price} </Price>
-              <Button
-                className="add-to-cart"
-                onClick={() => handleClick(product)}
-              >
-                Add to Basket
-              </Button>
-            </Selects>
-          </ProductInfo>
-          <ImageContainer>
-            <Image src={product.image} />
-          </ImageContainer>
-        </Wrapper>
-      )}
+      <Wrapper>
+        <ProductInfo>
+          <Name>{product.name}</Name>
+          <Brand>
+            <b>Brand:</b> {product.brand}
+          </Brand>
+          <Region>
+            <b>Region:</b> {product.region}
+          </Region>
+          <Country>
+            <b>Origin:</b> {product.country}
+          </Country>
+          <RoastLevel>
+            <b>Roast Level:</b> {product.roastLevel}
+          </RoastLevel>
+          <FlavourProfile>
+            <b>Flavour Profile:</b> {product.flavourProfile}
+          </FlavourProfile>
+          <Selects>
+            <Price>¥{product.price}</Price>
+            <Button onClick={() => handleClick(product)}>Add to Basket</Button>
+          </Selects>
+        </ProductInfo>
+
+        <ImageContainer>
+          <Image src={product.image} alt={product.name} />
+        </ImageContainer>
+      </Wrapper>
     </Container>
   );
 };
