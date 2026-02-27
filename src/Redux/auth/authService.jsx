@@ -1,7 +1,7 @@
 import { publicRequest } from "../../reqMethods";
 
 // Register user
-export const signup = async (userData) => {
+const signup = async (userData) => {
   const res = await publicRequest.post("auth/signup", userData);
 
   if (res.data) {
@@ -12,7 +12,7 @@ export const signup = async (userData) => {
 };
 
 // Login user
-export const login = async (userData) => {
+const login = async (userData) => {
   const res = await publicRequest.post("auth/login", userData);
 
   if (res.data?.token) {
@@ -23,6 +23,15 @@ export const login = async (userData) => {
 };
 
 // Logout
-export const logout = () => {
+const logout = () => {
   localStorage.removeItem("user");
 };
+
+// Default export object (matches import authService)
+const authService = {
+  signup,
+  login,
+  logout,
+};
+
+export default authService;
