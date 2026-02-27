@@ -1,0 +1,63 @@
+.coffee__explore-slider{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    z-index: 1;
+    border-block: 4px solid black;
+ 
+}
+.coffee__explore-slider_title{
+ width: 45rem;
+ font-size: 2rem;
+ font-weight: bold;
+ color: white;
+}
+.video-container{
+    display:flex;
+    height:100%;
+    width:max-content;
+    position: absolute;
+    overflow-x: hidden;
+    
+}
+/* .video { 
+    
+  
+     animation: fadeInOut 10000ms ease-in-out; 
+  }  */
+  
+  /* @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+    25% {
+      opacity: 1;
+    }
+    75% {
+      opacity: .75;
+    }
+ 
+    100% {
+      opacity: 0;
+    }
+  } */ */
+  
+  video {
+    min-width:100%;
+    max-height: 100%;
+    object-fit: cover;
+    
+    
+}
+
+
+
+
+
+
+
