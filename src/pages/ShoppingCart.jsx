@@ -243,8 +243,8 @@ const ShoppingCart = () => {
   };
   const handleCheckout = async (products) => {
     try {
-      // Create order first (backend returns order ID)
-      const orderRes = await axios.post(`${BASE_URL}/orders`, {
+      // Create order
+      const orderRes = await publicRequest.post("/orders", {
         products,
       });
 
@@ -254,9 +254,9 @@ const ShoppingCart = () => {
         throw new Error("Order creation failed");
       }
 
-      // Now create checkout session with order ID
-      const sessionRes = await axios.post(
-        `${BASE_URL}/orders/${order._id}/checkout`,
+      // Create checkout session
+      const sessionRes = await publicRequest.post(
+        `/orders/${order._id}/checkout`,
       );
 
       if (sessionRes.data?.url) {
