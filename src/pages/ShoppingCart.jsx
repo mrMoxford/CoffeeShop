@@ -4,9 +4,9 @@ import { HiMinus, HiPlus } from "react-icons/hi";
 import { TiDelete } from "react-icons/ti";
 import { tabletDevice, smallDevice, mediumDevice } from "../Responsive";
 import { useDispatch, useSelector } from "react-redux";
-import { BASE_URL } from "../reqMethods";
+import { publicRequest } from "../reqMethods";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
 import {
   incrementQuantity,
   decrementQuantity,
