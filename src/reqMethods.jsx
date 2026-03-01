@@ -11,3 +11,21 @@ export const userRequest = axios.create({
   baseURL: `${BASE_URL}/api`,
   withCredentials: true,
 });
+
+// 🔥 ADD THIS
+userRequest.interceptors.request.use(
+  (config) => {
+    const storedUser = localStorage.getItem("user");
+
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+
+      if (parsedUser.accessToken) {
+        config.headers.Authorization = `Bearer ${parsedUser.accessToken}`;
+      }
+    }
+
+    return config;
+  },
+  (error) => Promise.reject(error),
+);

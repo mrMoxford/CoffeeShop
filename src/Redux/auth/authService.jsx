@@ -15,8 +15,13 @@ const signup = async (userData) => {
 const login = async (userData) => {
   const res = await publicRequest.post("auth/login", userData);
 
-  if (res.data?.token) {
-    localStorage.setItem("user", JSON.stringify({ token: res.data.token }));
+  if (res.data?.accessToken) {
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        token: res.data.accessToken,
+      }),
+    );
   }
 
   return res.data;
