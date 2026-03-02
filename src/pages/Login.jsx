@@ -76,17 +76,19 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { currentUser, isFetching, error } = useSelector((state) => state.auth);
+  const { user, isLoading, message, isError } = useSelector(
+    (state) => state.auth,
+  );
 
   useEffect(() => {
-    if (error) {
-      toast.error(error);
+    if (isError) {
+      toast.error(message);
     }
 
-    if (currentUser) {
+    if (user) {
       navigate("/");
     }
-  }, [currentUser, error, navigate]);
+  }, [user, message, isError, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -94,7 +96,7 @@ const Login = () => {
     dispatch(login({ username, password }));
   };
 
-  if (isFetching) {
+  if (isLoading) {
     return <Spinner />;
   }
 
@@ -112,7 +114,7 @@ const Login = () => {
             placeholder="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          {error && <Message>Something went wrong</Message>}
+          {isError && <Message>Something went wrong</Message>}
           <Button className="login">Log In</Button>
           <ALink className="forgotten-password">Forgot your password?</ALink>
           <ALink to="/signup" className="signup">

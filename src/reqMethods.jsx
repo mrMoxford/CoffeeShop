@@ -15,13 +15,13 @@ export const userRequest = axios.create({
 // 🔥 ADD THIS
 userRequest.interceptors.request.use(
   (config) => {
-    const storedUser = localStorage.getItem("user");
+    const storedCredentials = localStorage.getItem("auth");
 
-    if (storedUser) {
-      const parsedUser = JSON.parse(storedUser);
+    if (storedCredentials) {
+      const parsedCred = JSON.parse(storedCredentials);
 
-      if (parsedUser.accessToken) {
-        config.headers.Authorization = `Bearer ${parsedUser.accessToken}`;
+      if (parsedCred.token) {
+        config.headers.Authorization = `Bearer ${parsedCred.token}`;
       }
     }
 

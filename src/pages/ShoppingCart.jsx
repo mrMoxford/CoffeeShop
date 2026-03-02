@@ -4,7 +4,7 @@ import { HiMinus, HiPlus } from "react-icons/hi";
 import { TiDelete } from "react-icons/ti";
 import { tabletDevice, smallDevice, mediumDevice } from "../Responsive";
 import { useDispatch, useSelector } from "react-redux";
-import { publicRequest } from "../reqMethods";
+import { userRequest } from "../reqMethods";
 import { Link } from "react-router-dom";
 
 import {
@@ -243,25 +243,24 @@ const ShoppingCart = () => {
   };
   const handleCheckout = async (products) => {
     try {
-      // Create order
-      const orderRes = await publicRequest.post("/orders", {
-        products,
+      const orderRes = await userRequest.post("/orders", {
+        products: products.map((item) => ({
+          productId: item._id,
+          quantity: item.quantity || 1,
+        })),
       });
 
       const order = orderRes.data?.data;
+      if (!order?._id) throw new Error("Order creation failed");
 
-      if (!order?._id) {
-        throw new Error("Order creation failed");
-      }
-
-      // Create checkout session
-      const sessionRes = await publicRequest.post(
+      const sessionRes = await userRequest.post(
         `/orders/${order._id}/checkout`,
       );
 
       if (sessionRes.data?.url) {
         window.location.href = sessionRes.data.url;
       }
+      dispatch(clearCart());
     } catch (err) {
       console.error(err);
     }

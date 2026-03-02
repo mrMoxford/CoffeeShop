@@ -88,7 +88,7 @@ const Logout = styled.button`
   border: none;
   text-transform: uppercase;
   cursor: pointer;
-  color: ${props => props.type === "navLogout" && "white"};
+  color: ${(props) => props.type === "navLogout" && "white"};
 `;
 const NavOpen = styled.div`
   position: absolute;
@@ -119,7 +119,7 @@ const NavClose = styled.div`
 `;
 const NavLogoContainer = styled.div`
   position: absolute;
-  top: .5rem;
+  top: 0.5rem;
   left: 1rem;
   ${smallDevice({ left: "1rem" })}
 `;
@@ -129,13 +129,15 @@ const NavListSmall = styled.ul`
   gap: 2rem;
   font-size: 2rem;
 `;
-
+const UserSpan = styled.span`
+  color: white;
+`;
 const NavBar = () => {
   const [menuToggle, setMenuToggle] = useState(false);
-  const quantity = useSelector(state => state.cart?.cartQuantity);
+  const quantity = useSelector((state) => state.cart?.cartQuantity);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector(state => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -171,9 +173,12 @@ const NavBar = () => {
             </Nav>
           </Badge>
           {user ? (
-            <Logout onClick={handleLogout} className="logout">
-              Logout
-            </Logout>
+            <>
+              <Logout onClick={handleLogout} className="logout">
+                Logout
+              </Logout>
+              <UserSpan>{user.username}</UserSpan>
+            </>
           ) : (
             <>
               <Nav to="/login" className="login">
