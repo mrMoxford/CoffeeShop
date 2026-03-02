@@ -24,12 +24,12 @@ const Container = styled.div`
   align-items: flex-start;
   color: black;
   font-size: 1.2rem;
-  background: hsla(0, 0%, 85%, 0.5);
+  background: hsl(0, 0%, 100%);
 
   ${smallDevice({ padding: "1rem", fontSize: "1rem" })};
 `;
 const Title = styled.h1`
-  margin-bottom: 4rem;
+  margin-block: 4rem;
   font-size: clamp(1.5rem, 5vw, 3rem);
   font-weight: 200;
   text-transform: uppercase;
@@ -153,8 +153,8 @@ const ClearButton = styled.button`
   font-size: 1.5rem;
   padding: 1rem;
   margin-block: 2rem;
-  border: 2px solid hsla(0, 0%, 0%, 0.21);
-  background-color: black;
+  border: none;
+  background-color: hsl(0, 100%, 19%);
   color: white;
   outline: transparent;
   cursor: pointer;
@@ -166,8 +166,7 @@ const Summary = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  background: hsla(104, 28%, 15%, 1);
-  color: white;
+  color: hsla(104, 28%, 15%, 1);
   gap: 2rem;
   padding: 1rem;
   ${mediumDevice({ width: "100%" })};
@@ -193,11 +192,12 @@ const CheckoutButton = styled.button`
   outline: transparent;
   cursor: pointer;
   width: 100%;
-  color: white;
-  border: 2px solid white;
+  color: black;
+  border: 2px solid black;
   background: transparent;
   &:hover {
-    background-color: hsla(360, 65%, 20%, 1);
+    color: white;
+    background-color: hsla(104, 28%, 15%, 1);
   }
   ${mediumDevice({ width: "50%" })};
   ${tabletDevice({ width: "100%" })};
@@ -212,7 +212,8 @@ const CartTitleContainer = styled.div`
 `;
 const CartTitle = styled.h3`
   text-transform: uppercase;
-  font-weight: 300;
+  font-weight: 200;
+  font-size: 200;
 `;
 const Delete = styled.div`
   display: flex;
@@ -272,7 +273,7 @@ const ShoppingCart = () => {
 
   return (
     <Container>
-      <Title>review your items</Title>
+      <Title>Cart</Title>
       <Wrapper>
         <Sections>
           <Topsection>
@@ -285,7 +286,6 @@ const ShoppingCart = () => {
           <Bottomsection>
             {cart.cartQuantity ? (
               <>
-                {" "}
                 <CartTitleContainer>
                   <CartTitle>Image</CartTitle>
                   <CartTitle>Name</CartTitle>
@@ -303,11 +303,10 @@ const ShoppingCart = () => {
                       ></CartItemThumbnail>
                       <CartItemName>{item.name}</CartItemName>
                       <CartItemDetails>
-                        <i> 100g whole beans</i>
+                        <i> {`${item.size} whole beans`}</i>
                       </CartItemDetails>
 
                       <ItemPrice>
-                        {" "}
                         {` ¥${(
                           item.price * item.quantity
                         ).toLocaleString()}`}{" "}
@@ -335,7 +334,7 @@ const ShoppingCart = () => {
                       </Delete>
                     </CartItem>
                   ))}
-                </Info>{" "}
+                </Info>
                 <Hr />
               </>
             ) : (

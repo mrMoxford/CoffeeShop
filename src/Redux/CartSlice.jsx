@@ -18,6 +18,7 @@ const cartSlice = createSlice({
       );
       if (productInCart) {
         productInCart.quantity += 1;
+
         toast.info(`${action.payload.name} quantity increased`, {
           position: "top-right",
           autoClose: 500,
@@ -41,7 +42,7 @@ const cartSlice = createSlice({
           theme: "colored",
         });
       }
-
+      state.cartQuantity += 1;
       localStorage.setItem("products", JSON.stringify(state.products));
     },
 

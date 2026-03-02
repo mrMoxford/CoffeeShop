@@ -14,10 +14,7 @@ const Container = styled.div`
   padding: 0.5rem 1rem;
   position: fixed;
   z-index: 999;
-  background: hsla(104, 28%, 15%, 0.7);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(6.9px);
-  -webkit-backdrop-filter: blur(6.9px);
+  background: hsla(104, 28%, 15%, 1);
   font-size: 1rem;
 `;
 const Wrapper = styled.div`
@@ -88,7 +85,7 @@ const Logout = styled.button`
   border: none;
   text-transform: uppercase;
   cursor: pointer;
-  color: ${(props) => props.type === "navLogout" && "white"};
+  color: ${(props) => props.type === "navLogout" && "red"};
 `;
 const NavOpen = styled.div`
   position: absolute;
@@ -148,9 +145,8 @@ const NavBar = () => {
     <Container>
       <Wrapper>
         <LeftCol>
-          {" "}
           <Logo to="/" className="logo">
-            ODESSY_JAVA
+            ODESSY Coffee
           </Logo>
         </LeftCol>
         <CenterCol>
@@ -174,10 +170,14 @@ const NavBar = () => {
           </Badge>
           {user ? (
             <>
-              <Logout onClick={handleLogout} className="logout">
+              <Logout
+                type="navLogout"
+                onClick={handleLogout}
+                className="logout"
+              >
                 Logout
               </Logout>
-              <UserSpan>{user.username}</UserSpan>
+              <UserSpan>{`${user.username} ${user.isAdmin ? "(Admin)" : ""}`}</UserSpan>
             </>
           ) : (
             <>
@@ -205,7 +205,7 @@ const NavBar = () => {
               to="/"
               className="logo"
             >
-              ODESSY_JAVA
+              ODESSY Coffee
             </LogoSmall>
           </NavLogoContainer>
           <NavListSmall>

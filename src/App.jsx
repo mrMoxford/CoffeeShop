@@ -1,10 +1,10 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home.jsx";
-import Regions from "./components/Regions.jsx";
+import Regions from "./pages/Regions.jsx";
 import StorePage from "./pages/StorePage.jsx";
 import SingleProduct from "./pages/SingleProduct.jsx";
-import ExploreRegion from "./pages/ExploreRegion";
+import Region from "./pages/RegionDetailPage.jsx";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import ShoppingCart from "./pages/ShoppingCart";
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/regions/:region",
-        element: <ExploreRegion />,
+        element: <Region />,
       },
       {
         path: "/store",

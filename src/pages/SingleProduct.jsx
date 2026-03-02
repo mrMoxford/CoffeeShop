@@ -15,7 +15,7 @@ const Container = styled.div`
   font-weight: 200;
   font-size: 1.5rem;
   color: black;
-  background: hsla(0, 0%, 85%, 0.5);
+  background: hsl(0, 0%, 100%);
   ${smallDevice({ padding: "1rem" })};
 `;
 
@@ -84,6 +84,7 @@ const Button = styled.button`
   font-weight: 500;
   font-size: 1rem;
   outline: none;
+  background-color: white;
   border: 2px solid hsla(4, 25%, 13%, 0.2);
   color: hsla(104, 28%, 15%, 1);
   cursor: pointer;

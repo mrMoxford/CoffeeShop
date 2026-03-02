@@ -27,44 +27,28 @@ const CatContainer = styled.div`
     alignItems: "flex-start",
   })}
 `;
-const Cat = styled.p`
+const Select = styled.select`
   font-size: clamp(0.5rem, 2rem, 3rem);
   cursor: pointer;
-  color: ${props => (props.active === true ? "red" : "black")};
+  color: ${(props) => (props.active === true ? "red" : "black")};
   ${smallDevice({})}
 `;
+const Option = styled.option``;
 const StorePage = () => {
   const [region, setRegion] = useState(null);
-  const handleClick = e => {
-    setRegion(e.target.getAttribute("value"));
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setRegion(value === "all" ? null : value);
   };
   return (
     <Container>
       <CatContainer>
-        <Cat active={region === null ? true : false} onClick={handleClick}>
-          All
-        </Cat>
-        <Cat
-          active={region === "Africa" ? true : false}
-          value="Africa"
-          onClick={handleClick}
-        >
-          Africa
-        </Cat>
-        <Cat
-          active={region === "Asia" ? true : false}
-          value="Asia"
-          onClick={handleClick}
-        >
-          Asia
-        </Cat>
-        <Cat
-          active={region === "South America" ? true : false}
-          value="South America"
-          onClick={handleClick}
-        >
-          South America
-        </Cat>
+        <Select onChange={handleChange} value={region || "all"}>
+          <Option value="all">All</Option>
+          <Option value="Africa">Africa</Option>
+          <Option value="Asia">Asia</Option>
+          <Option value="South America">South America</Option>
+        </Select>
       </CatContainer>
       <Products region={region} />
     </Container>

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import HeroVideo from "../assets/videos/bgVid.mp4";
+import HeroVideo from "../assets/videos/bgVideo.mp4";
 import HeroPoster from "../assets/CoffeeImgs/HeroPoster.jpg";
 import { tabletDevice } from "../Responsive";
 const Container = styled.header`
@@ -72,12 +72,21 @@ const Home = () => {
     <Container>
       <Content>
         <HeaderTitle>
-          Let us take your <Span>tastebuds</Span> on a journey of discovery...
+          Let us take your <Span>tastebuds</Span> on a journey to discover
+          specialty coffee.
         </HeaderTitle>
       </Content>
 
       {/* Desktop video */}
-      <Video autoPlay loop muted playsInline poster={HeroPoster}>
+      <Video
+        autoPlay
+        muted
+        playsInline
+        poster={HeroPoster}
+        onLoadedMetadata={(e) => {
+          e.target.playbackRate = 1; // slow down the video
+        }}
+      >
         <source src={HeroVideo} type="video/mp4" />
       </Video>
 

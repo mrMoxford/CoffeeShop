@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { publicRequest } from "../reqMethods";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+
 import Product from "./Product";
 import Spinner from "./Spinner";
 
@@ -13,11 +13,6 @@ const Container = styled.div`
   gap: 2rem;
   place-items: center;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-`;
-
-const Cart = styled(Link)`
-  text-decoration: none;
-  color: white;
 `;
 
 const Products = ({ region }) => {
@@ -49,11 +44,7 @@ const Products = ({ region }) => {
         <Spinner />
       ) : (
         Array.isArray(products) &&
-        products.map((item) => (
-          <Cart to={`/store/${item._id}`} key={item._id}>
-            <Product item={item} />
-          </Cart>
-        ))
+        products.map((item) => <Product key={item._id} item={item} />)
       )}
     </Container>
   );

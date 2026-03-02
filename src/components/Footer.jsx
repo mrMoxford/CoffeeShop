@@ -47,24 +47,20 @@ const SocialLink = styled.a`
 const Footer = () => {
   return (
     <Container>
-      <Left>
-        <Logo to="/">ODESSY_JAVA</Logo>
-        <SocialMedia>
-          <SocialLink href="http://www.facebook.com">
-            <AiFillFacebook size={"2rem"} />
-          </SocialLink>
-          <SocialLink href="htttp://www.instagram.com">
-            <AiFillInstagram size={"2rem"} />
-          </SocialLink>
-          <SocialLink href="htttp://www.twitter.com">
-            <AiOutlineTwitter size={"2rem"} />
-          </SocialLink>
-          <SocialLink href="htttp://www.youtube.com">
-            <AiFillYoutube size={"2rem"} />
-          </SocialLink>
-        </SocialMedia>
-      </Left>
-      <NewsLetter />
+      <SocialMedia>
+        <SocialLink href="http://www.facebook.com">
+          <AiFillFacebook size={"2rem"} />
+        </SocialLink>
+        <SocialLink href="htttp://www.instagram.com">
+          <AiFillInstagram size={"2rem"} />
+        </SocialLink>
+        <SocialLink href="htttp://www.twitter.com">
+          <AiOutlineTwitter size={"2rem"} />
+        </SocialLink>
+        <SocialLink href="htttp://www.youtube.com">
+          <AiFillYoutube size={"2rem"} />
+        </SocialLink>
+      </SocialMedia>
     </Container>
   );
 };

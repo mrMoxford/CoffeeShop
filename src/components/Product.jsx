@@ -1,8 +1,10 @@
 import React from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import styled from "styled-components";
-import { largeDevice} from "../Responsive";
-
+import { largeDevice } from "../Responsive";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Redux/CartSlice";
+import { useNavigate } from "react-router-dom";
 const Container = styled.div`
   height: 100%;
   width: 100%;
@@ -10,17 +12,18 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem;  
+  padding: 2rem;
   position: relative;
   background: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
   &:hover {
-    ${largeDevice({transform: "scale(1.1)", transition: " scale 500ms ease-in"})}
-    
+    ${largeDevice({
+      transform: "scale(1.1)",
+      transition: " scale 500ms ease-in",
+    })}
   }
-  
 `;
 
 const SmallCircle = styled.div`
@@ -81,9 +84,21 @@ const Icon = styled.i`
   width: 2rem;
   aspect-ratio: 1;
 `;
+
 const Product = ({ item }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleAddToCart = (e) => {
+    e.stopPropagation(); // prevents navigation
+    console.log(item);
+    dispatch(addToCart({ ...item })); // or your add-to-cart action
+  };
+  const handleNavigate = () => {
+    navigate(`/store/${item._id}`);
+  };
+
   return (
-    <Container>
+    <Container onClick={handleNavigate}>
       <ImageContainer>
         <SmallCircle>
           <Size>{item.size}</Size>
@@ -91,7 +106,7 @@ const Product = ({ item }) => {
         <Image src={item.image} />
       </ImageContainer>
 
-      <PriceContainer>
+      <PriceContainer onClick={(e) => handleAddToCart(e)}>
         <Price>¥{item.price}</Price>
         <Icon>
           <AiOutlinePlus color="white" size={30} />
