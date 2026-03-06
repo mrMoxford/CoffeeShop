@@ -4,6 +4,12 @@ import { useCart } from "../hooks/useCart";
 import { largeDevice } from "../Responsive";
 
 import { useNavigate } from "react-router-dom";
+const Image = styled.img`
+  heigth: 40%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  transition: " scale 300ms ease-in";
+`;
 const Container = styled.div`
   height: 100%;
   width: 100%;
@@ -17,12 +23,6 @@ const Container = styled.div`
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  &:hover {
-    ${largeDevice({
-      transform: "scale(1.1)",
-      transition: " scale 500ms ease-in",
-    })}
-  }
 `;
 
 const SmallCircle = styled.div`
@@ -53,35 +53,49 @@ const ImageContainer = styled.div`
   width: 100%;
   aspect-ratio: 1/1.2;
   position: relative;
+  &:hover ${Image} {
+    ${largeDevice({
+      transform: "scale(1.2)",
+    })}
+  }
 `;
 
-const Image = styled.img`
-  heigth: 40%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-`;
-
-const PriceContainer = styled.div`
-  flex: 1;
-  width: 100%;
-  display: flex;
-  color: white;
-  aspect-ratio: 1/0.2;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  background: hsla(360, 65%, 20%, 1);
-  margin-top: 1rem;
-`;
-const Price = styled.p`
-  font-size: 1.5rem;
-`;
 const Icon = styled.i`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 2rem;
   aspect-ratio: 1;
+  transition: transform 0.3s ease;
+  svg {
+    fill: hsla(104, 28%, 15%, 1);
+  }
+`;
+const PriceContainer = styled.div`
+  flex: 1;
+  width: 100%;
+  display: flex;
+  color:hsla(104, 28%, 15%, 1);
+  border:2px solid hsla(104, 28%, 15%, 1); 
+  aspect-ratio: 1/0.2;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: 
+  margin-top: 1rem;
+  transition: background 0.3s ease;
+  &:hover{
+  background: hsla(360, 65%, 20%, 1);
+  color: white;
+  }
+  &:hover ${Icon} {
+    transform: rotate(180deg);
+    svg{
+    fill: white;}
+  }
+`;
+const Price = styled.p`
+  font-size: 1.5rem;
 `;
 
 const Product = ({ item }) => {
@@ -107,7 +121,7 @@ const Product = ({ item }) => {
       <PriceContainer onClick={(e) => handleAddToCart(e)}>
         <Price>¥{item.price}</Price>
         <Icon>
-          <AiOutlinePlus color="white" size={30} />
+          <AiOutlinePlus size={30} />
         </Icon>
       </PriceContainer>
     </Container>
