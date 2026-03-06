@@ -1,9 +1,7 @@
-import React from "react";
 import styled from "styled-components";
 import { regions } from "../assets/data";
 import { tabletDevice, smallDevice } from "../Responsive";
 import { useLocation } from "react-router-dom";
-import Products from "../components/Products";
 
 const Container = styled.div`
   padding: 4rem;
@@ -24,17 +22,20 @@ const Title = styled.h1`
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: space-between;
+  align-items: center;
   ${tabletDevice({ flexDirection: "column" })}
 `;
-const Image = styled.div`
+const ImageContainer = styled.div`
   display: flex;
   flex: 1;
   justify-content: center;
   align-items: center;
   outline: hsla(104, 28%, 15%, 1);
 `;
-
+const Img = styled.img`
+  height: 100%;
+  width: auto;
+`;
 const Info = styled.div`
   flex: 1;
   padding: 1rem;
@@ -48,19 +49,22 @@ const P = styled.p`
 const Region = () => {
   const location = useLocation();
   const name = location.pathname.split("/")[2];
-  const region = regions.filter((r) => r.title === name);
-
+  const region = regions.find(
+    (r) => r.title.toLowerCase() === name.toLowerCase(),
+  );
   return (
     <Container>
-      {region.map((r) => (
-        <Wrapper key={r.title}>
-          <Image>{r.image}</Image>
+      {region && (
+        <Wrapper>
+          <ImageContainer>
+            <Img src={region.image} alt={region.title}></Img>
+          </ImageContainer>
           <Info>
-            <Title>{r.title}</Title>
-            <P>{r.info}</P>
+            <Title>{region.title}</Title>
+            <P>{region.info}</P>
           </Info>
         </Wrapper>
-      ))}
+      )}
     </Container>
   );
 };

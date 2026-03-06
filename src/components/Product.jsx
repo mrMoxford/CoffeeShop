@@ -1,9 +1,8 @@
-import React from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import styled from "styled-components";
+import { useCart } from "../hooks/useCart";
 import { largeDevice } from "../Responsive";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../Redux/CartSlice";
+
 import { useNavigate } from "react-router-dom";
 const Container = styled.div`
   height: 100%;
@@ -86,12 +85,11 @@ const Icon = styled.i`
 `;
 
 const Product = ({ item }) => {
-  const dispatch = useDispatch();
+  const { addItem } = useCart();
   const navigate = useNavigate();
   const handleAddToCart = (e) => {
     e.stopPropagation(); // prevents navigation
-    console.log(item);
-    dispatch(addToCart({ ...item })); // or your add-to-cart action
+    addItem({ ...item }); // or your add-to-cart action
   };
   const handleNavigate = () => {
     navigate(`/store/${item._id}`);

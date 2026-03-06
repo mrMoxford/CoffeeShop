@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { HiMinus, HiPlus } from "react-icons/hi";
 import { TiDelete } from "react-icons/ti";
 import { tabletDevice, smallDevice, mediumDevice } from "../Responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { userRequest } from "../reqMethods";
+import { useCart } from "../hooks/useCart";
 import { Link } from "react-router-dom";
 
 import {
@@ -222,54 +223,29 @@ const Delete = styled.div`
   grid-area: delete;
 `;
 const Empty = styled.p``;
+const ErrorContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  text-decoration: none;
+`;
+const ErrorMessage = styled.p`
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+`;
 const ShoppingCart = () => {
-  const cart = useSelector((state) => state.cart);
-  const user = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getTotals());
-  }, [cart, dispatch]);
-
-  const handleIncrement = (item) => {
-    dispatch(incrementQuantity(item));
-  };
-  const handleDecrement = (item) => {
-    dispatch(decrementQuantity(item));
-  };
-  const handleRemove = (item) => {
-    dispatch(removeItem(item));
-  };
-  const handleClearCart = () => {
-    dispatch(clearCart());
-  };
-  const handleCheckout = async (products) => {
-    try {
-      const orderRes = await userRequest.post("/orders", {
-        products: products.map((item) => ({
-          productId: item._id,
-          quantity: item.quantity || 1,
-        })),
-      });
-
-      const order = orderRes.data?.data;
-      if (!order?._id) throw new Error("Order creation failed");
-
-      const sessionRes = await userRequest.post(
-        `/orders/${order._id}/checkout`,
-      );
-
-      if (sessionRes.data?.url) {
-        window.location.href = sessionRes.data.url;
-      }
-      dispatch(clearCart());
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const cartShipping = cart.cartQuantity === 0 ? 0 : cart.shipping;
-  const cartDiscount = cart.cartTotal < 10000 ? 0 : cart.discount;
-  const summaryTotal = cart.cartTotal + cartShipping - cartDiscount;
+  const {
+    cart,
+    checkoutError,
+    summaryTotal,
+    cartShipping,
+    cartDiscount,
+    handleIncrement,
+    handleDecrement,
+    handleRemove,
+    handleClearCart,
+    handleCheckout,
+  } = useCart();
 
   return (
     <Container>
@@ -363,7 +339,15 @@ const ShoppingCart = () => {
             <SummurayText>Estimated Total</SummurayText>
             <SummurayPrice>{` ¥${summaryTotal.toLocaleString()}`}</SummurayPrice>
           </SummurayItem>
-
+          {checkoutError && (
+            <ErrorMessage>
+              {checkoutError}{" "}
+              <ErrorContainer>
+                <Link to="/login">Login</Link>
+                <Link to="/signup">Signup</Link>
+              </ErrorContainer>
+            </ErrorMessage>
+          )}
           <CheckoutButton
             id="checkout"
             onClick={() => handleCheckout(cart.products)}

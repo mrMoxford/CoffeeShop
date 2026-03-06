@@ -9,7 +9,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   min-height: 100vh;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: flex-start;
   background: hsla(0, 0%, 85%, 0.5);
   ${smallDevice({ padding: "1rem" })}
@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: space-between;
+  align-items: center;
   gap: 2rem;
   ${tabletDevice({ flexDirection: "column" })};
 `;
@@ -36,6 +36,7 @@ const Regions = () => {
   return (
     <Container id="Explore">
       <Title>Pick a region on the map to start your journey.</Title>
+      {console.log(regions)}
       <Wrapper>
         {regions.map((region) => (
           <RegionItem

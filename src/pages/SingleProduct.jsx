@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { publicRequest } from "../reqMethods";
+import { useProducts } from "../hooks/useProducts";
 import { tabletDevice, smallDevice } from "../Responsive";
 import { useLocation } from "react-router-dom";
 import { addToCart, getTotals } from "../Redux/CartSlice";
@@ -98,33 +98,8 @@ const Button = styled.button`
 const SingleProduct = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  const [product, setProduct] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
+  const { products: product, isLoading } = useProducts({ id });
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
-
-  useEffect(() => {
-    dispatch(getTotals());
-  }, [cart, dispatch]);
-
-  useEffect(() => {
-    const getProduct = async () => {
-      try {
-        const res = await publicRequest.get(`/products/find/${id}`);
-
-        // API returns { success: true, data: {...} }
-        setProduct(res.data.data);
-        setIsLoading(false);
-      } catch (err) {
-        console.error(err);
-        setIsLoading(false);
-      }
-    };
-
-    getProduct();
-  }, [id]);
-
   const handleClick = (product) => {
     if (product) {
       dispatch(addToCart({ ...product }));

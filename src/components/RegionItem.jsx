@@ -10,23 +10,18 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   border-right: 1px solid hsla(104, 28%, 15%, 0.2);
-  border-left: ${props =>
+  border-left: ${(props) =>
     props.id === 1 ? "1px solid hsla(104, 28%, 15%, 0.2)" : "none"};
   ${tabletDevice({ border: "none" })};
 `;
-const Image = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  & svg {
-    height: 100%;
-    width: 100%;
 
-    @media (min-width: 54.6em) {
-      &:hover path {
-        fill: hsla(104, 28%, 15%, 1);
-      }
+const Img = styled.img`
+  height: 50vh;
+  width: auto;
+  filter: grayscale(100%) brightness(0.8);
+  @media (min-width: 54.6em) {
+    &:hover {
+      filter: hue-rotate(90deg);
     }
   }
 `;
@@ -44,10 +39,11 @@ const Title = styled.p`
 `;
 const Region = styled(Link)``;
 const RegionItem = ({ id, item }) => {
+  console.log(item.image);
   return (
     <Container id={id}>
       <Region to={`/regions/${item.title}`}>
-        <Image>{item.image}</Image>
+        <Img src={item.image} alt={item.title} />
       </Region>
       <Info>
         <Title>{item.title}</Title>

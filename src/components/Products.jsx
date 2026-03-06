@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import { publicRequest } from "../reqMethods";
 import styled from "styled-components";
-
+import { useProducts } from "../hooks/useProducts";
 import Product from "./Product";
 import Spinner from "./Spinner";
 
@@ -16,28 +14,10 @@ const Container = styled.div`
 `;
 
 const Products = ({ region }) => {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await publicRequest.get(
-          region ? `/products?region=${region}` : `/products`,
-        );
-
-        // API returns { success: true, data: [...] }
-        setProducts(res.data.data || []);
-        setIsLoading(false);
-      } catch (err) {
-        console.error(err);
-        setIsLoading(false);
-      }
-    };
-
-    getProducts();
-  }, [region]);
-
+  const { products, isLoading, error } = useProducts({ region });
+  if (error) {
+    return <p>Something went wrong. Please try again.</p>;
+  }
   return (
     <Container>
       {isLoading ? (
