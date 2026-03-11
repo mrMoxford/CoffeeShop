@@ -24,7 +24,7 @@ const Dropdown = styled.div<{ open: boolean }>`
   position: absolute;
   color: black;
   top: 2.5rem;
-  right: 0;
+  left: 0;
   gap: 1rem;
   background: white;
   border-radius: 8px;
@@ -32,7 +32,7 @@ const Dropdown = styled.div<{ open: boolean }>`
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   min-width: 250px;
   max-height: 60vh;
-  overflow-y: auto;
+  overflow-x: auto;
   z-index: 1000;
   padding: 1rem;
 `;
@@ -53,8 +53,8 @@ const FavoriteItem = styled.div`
   button {
     margin-left: auto;
     padding: 0.1rem 0.3rem;
-    background: red;
-    color: white;
+    background: white;
+    color: red;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -65,6 +65,7 @@ const LikeButton = styled.button`
   border: none;
   cursor: pointer;
 `;
+
 const FavoritesWidget = () => {
   const [open, setOpen] = useState(false);
   const [prevCount, setPrevCount] = useState(0);
@@ -90,6 +91,7 @@ const FavoritesWidget = () => {
       {favorites.length > 0 ? (
         <LikeButton onClick={() => setOpen(!open)}>
           <IoIosHeart size={35} color="red" />
+          {favorites.length}
         </LikeButton>
       ) : (
         <LikeButton onClick={() => setOpen(!open)}>
