@@ -12,12 +12,12 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   background: hsla(0, 0%, 85%, 0.5);
-  ${smallDevice(`padding: 4rem 1rem;`)}
+  ${smallDevice(`padding: 2rem 1rem;`)}
 `;
 const CatContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 2rem;
   width: 100%;
