@@ -72,36 +72,49 @@ const Icon = styled.i`
   cursor: pointer;
   transition: transform 0.3s ease;
   opacity: 0;
+  transform: translateX(10px);
+
+  transition: all 0.35s ease;
+
   svg {
-    fill: hsla(104, 28%, 15%, 1);
-  }
-`;
-const PriceContainer = styled.div`
-  flex: 1;
-  width: 100%;
-  display: flex;
-  color:hsla(104, 28%, 15%, 1);
-  border:2px solid hsla(104, 28%, 15%, 1); 
-  aspect-ratio: 1/0.2;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  background: 
-  margin-top: 1rem;
-  transition: background 0.3s ease;
-  &:hover {
-  background: hsla(360, 65%, 20%, 1);
-  color: white;
-  }
-  &:hover ${Icon} {
-    opacity: 1;
-    transform: rotate(180deg);
-    svg{
-    fill: white;}
+    fill: white;
+    transition: fill 0.3s ease;
   }
 `;
 const Price = styled.p`
   font-size: 1.5rem;
+  transition: transform 0.35s ease;
+`;
+const PriceContainer = styled.div`
+  flex: 1;
+  width: 70%;
+  display: flex;
+  color: hsla(104, 28%, 15%, 1);
+  border: 2px solid hsla(104, 28%, 15%, 1);
+  aspect-ratio: 1/0.2;
+  justify-content: center;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  margin-top: 1rem;
+  overflow: hidden;
+  transition: all 0.35s ease;
+
+  &:hover {
+    width: 100%;
+    justify-content: space-around;
+    background: hsla(360, 65%, 20%, 1);
+    color: white;
+    transform: scale(1.02);
+  }
+
+  &:hover ${Icon} {
+    opacity: 1;
+    transform: translateX(0) rotate(180deg);
+  }
+
+  &:hover ${Price} {
+    transform: translateX(-5px);
+  }
 `;
 
 const Product = ({ product }: ProductProps) => {

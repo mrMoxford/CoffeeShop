@@ -28,13 +28,13 @@ export const checkout = async (products: CartProduct[]): Promise<string> => {
   if (!order?._id) throw new Error("Order creation failed");
 
   // 2️⃣ Create checkout session
-  const sessionRes = await userRequest.post<{ data: SessionResponse }>(
+  const sessionRes = await userRequest.post<SessionResponse>(
     `/orders/${order._id}/checkout`,
   );
 
-  const session = sessionRes.data.data;
-
-  if (!session?.url) throw new Error("Checkout session failed");
+  const session = sessionRes.data;
+  console.log(session.url);
+  if (!session.url) throw new Error("Checkout session failed");
 
   return session.url; // frontend can redirect to this URL
 };

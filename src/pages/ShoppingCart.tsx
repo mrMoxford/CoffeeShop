@@ -6,7 +6,8 @@ import { TiDelete } from "react-icons/ti";
 import { tabletDevice, smallDevice, mediumDevice } from "../Responsive";
 import { useCart } from "../hooks/useCart";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../Redux/store";
 const Container = styled.div`
   min-height: 100vh;
   width: 100%;
@@ -224,6 +225,7 @@ const ErrorMessage = styled.p`
 `;
 
 const ShoppingCart = () => {
+  const { user } = useSelector((state: RootState) => state.auth);
   const {
     cart,
     checkoutError,
@@ -235,6 +237,7 @@ const ShoppingCart = () => {
     handleRemove,
     handleClearCart,
     handleCheckout,
+    isCheckoutLoading,
   } = useCart();
 
   return (
@@ -307,17 +310,17 @@ const ShoppingCart = () => {
             <SummaryPrice>¥{summaryTotal.toLocaleString()}</SummaryPrice>
           </SummaryItem>
 
-          {checkoutError && (
-            <ErrorMessage>
-              {checkoutError}
-              <ErrorContainer>
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Signup</Link>
-              </ErrorContainer>
-            </ErrorMessage>
+          <ErrorMessage>{checkoutError}</ErrorMessage>
+          {checkoutError && !user && (
+            <ErrorContainer>
+              <Link to="/login">Login</Link>
+              <Link to="/signup">Signup</Link>
+            </ErrorContainer>
           )}
 
-          <CheckoutButton onClick={handleCheckout}>Checkout Now</CheckoutButton>
+          <CheckoutButton onClick={handleCheckout} disabled={isCheckoutLoading}>
+            {isCheckoutLoading ? "Redirecting..." : "Checkout Now"}
+          </CheckoutButton>
         </Summary>
       </Wrapper>
     </Container>

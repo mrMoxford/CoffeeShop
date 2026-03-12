@@ -30,7 +30,7 @@ export const useCart = () => {
 
   useEffect(() => {
     dispatch(getTotals());
-  }, [cart, dispatch]);
+  }, [cart.cartQuantity, cart.cartTotal, dispatch]);
 
   // --- Redux actions ---
   const addItem = (product: Product) => dispatch(addToCart(product));
@@ -46,7 +46,6 @@ export const useCart = () => {
       return checkoutService(products);
     },
     onSuccess: (url: string) => {
-      dispatch(clearCart());
       window.location.href = url;
     },
     onError: (error: any) => {

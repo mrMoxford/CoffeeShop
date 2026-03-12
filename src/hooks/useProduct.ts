@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../services/productService";
 import { Product } from "../types/product.type";
-
+import { staticProducts } from "../assets/staticData/staticProducts";
 export const useProduct = (id: string) => {
   return useQuery<Product | undefined>({
     queryKey: ["product", id],
@@ -12,6 +12,7 @@ export const useProduct = (id: string) => {
       if (Array.isArray(data)) return data[0];
       return data;
     },
-    enabled: !!id, // Only fetch if id is provided
+    enabled: !!id,
+    initialData: () => staticProducts.find((product) => product._id === id),
   });
 };

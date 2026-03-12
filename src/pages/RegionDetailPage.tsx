@@ -14,7 +14,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
-  ${smallDevice(`padding: 2rem ,1rem; `)}
+  ${smallDevice(`padding: 1rem; `)}
 `;
 const Title = styled.h1`
   font-size: 3rem;
@@ -61,6 +61,7 @@ const Info = styled.div`
 const P = styled.p`
   margin-top: 1rem;
   line-height: 1.5;
+  font-size: clamp(0.5rem, 1.2vw + 0.5rem, 2rem);
 `;
 const Region = () => {
   const location = useLocation();

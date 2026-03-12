@@ -7,6 +7,6 @@ export const useProducts = (region?: string) => {
   return useQuery<Product[]>({
     queryKey: ["products", region],
     queryFn: () => getProducts(undefined, region) as Promise<Product[]>,
-    initialData: staticProducts,
+    initialData: () => staticProducts,
   });
 };

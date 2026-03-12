@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { CgCloseO } from "react-icons/cg";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { RiShoppingBasket2Line } from "react-icons/ri";
-import { smallDevice, tabletDevice } from "../Responsive";
+import { mediumDevice, smallDevice, tabletDevice } from "../Responsive";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import Badge from "@mui/material/Badge";
@@ -27,39 +27,32 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 const LeftCol = styled.div`
-  flex: 1;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
 `;
 const Logo = styled(Link)`
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 200;
   text-transform: uppercase;
   text-decoration: none;
   color: white;
   margin: 0;
   padding: 0;
-  ${smallDevice(` font-size: 1.5rem; `)}
 `;
 const LogoSmall = styled(Logo)`
   color: white;
 `;
 const CenterCol = styled.div`
-  flex: 2;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   ${tabletDevice(`display: none;`)}
 `;
 
 const NavList = styled.ul`
   display: flex;
-  justify-content: center;
   gap: 2rem;
   width: 100%;
   padding: 0;
-
   text-transform: uppercase;
   list-style: none;
 `;
@@ -76,9 +69,8 @@ const NavMini = styled(Nav)`
   color: white;
 `;
 const RightCol = styled.div`
-  flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: 2rem;
   text-transform: uppercase;
@@ -169,7 +161,7 @@ const NavBar = () => {
         <RightCol>
           <Badge badgeContent={quantity} color="warning">
             <Nav to="/cart" className="cart">
-              <RiShoppingBasket2Line color="white" size={"2rem"} />
+              <RiShoppingBasket2Line color="white" size={"1.5rem"} />
             </Nav>
           </Badge>
           {user ? (

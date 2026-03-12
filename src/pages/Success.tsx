@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useCart } from "../hooks/useCart";
+import { useParams } from "react-router-dom";
+import { userRequest } from "../reqMethods";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,7 +22,22 @@ const Small = styled.p`
 `;
 
 const Success = () => {
-  const location = useLocation();
+  const { handleClearCart } = useCart();
+  const { orderId } = useParams(); // or pass via query params
+
+  useEffect(() => {
+    if (!orderId) return;
+
+    const interval = setInterval(async () => {
+      const res = await userRequest.get(`/orders/${orderId}`);
+      if (res.data.status === "paid") {
+        handleClearCart(); // ✅ clears cart
+        clearInterval(interval); // stop polling
+      }
+    }, 2000); // every 2 seconds
+
+    return () => clearInterval(interval);
+  }, [orderId, handleClearCart]);
 
   return (
     <Container>
