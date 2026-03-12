@@ -85,7 +85,8 @@ const Button = styled.button`
   font-size: 1rem;
   outline: none;
   background-color: white;
-  border: 2px solid hsla(4, 25%, 13%, 0.2);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   color: hsla(104, 28%, 15%, 1);
   cursor: pointer;
   &:hover {

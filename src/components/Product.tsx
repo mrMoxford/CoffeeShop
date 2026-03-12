@@ -65,6 +65,8 @@ const ImageContainer = styled.div`
 
 const Icon = styled.i`
   display: flex;
+  position: absolute;
+  right: 3rem;
   align-items: center;
   justify-content: center;
   width: 2rem;
@@ -90,18 +92,17 @@ const PriceContainer = styled.div`
   width: 70%;
   display: flex;
   color: hsla(104, 28%, 15%, 1);
-  border: 2px solid hsla(104, 28%, 15%, 1);
-  aspect-ratio: 1/0.2;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   justify-content: center;
   align-items: center;
-  padding: 0.8rem 1rem;
+  padding: 0.4rem 0.5rem;
   margin-top: 1rem;
   overflow: hidden;
   transition: all 0.35s ease;
 
   &:hover {
     width: 100%;
-    justify-content: space-around;
     background: hsla(360, 65%, 20%, 1);
     color: white;
     transform: scale(1.02);
@@ -113,7 +114,7 @@ const PriceContainer = styled.div`
   }
 
   &:hover ${Price} {
-    transform: translateX(-5px);
+    transform: translateX(-2rem);
   }
 `;
 
