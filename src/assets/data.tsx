@@ -4,33 +4,7 @@
 import africa from "./Countries/africaHighspec.svg";
 import asia from "./Countries/asiaHighspec.svg";
 import southamerica from "./Countries/southAmericaHighspec.svg";
-import Brazil01 from "./CoffeeImgs/Brazil01.png";
-import Brazil02 from "./CoffeeImgs/Brazil02.png";
-import Brazil03 from "./CoffeeImgs/Brazil03.png";
-import Burundi01 from "./CoffeeImgs/Burundi01.png";
-import Burundi02 from "./CoffeeImgs/Burundi02.png";
-import Burundi03 from "./CoffeeImgs/Burundi03.png";
-import Colombia01 from "./CoffeeImgs/Colombia01.png";
-import Colombia02 from "./CoffeeImgs/Colombia02.png";
-import Colombia03 from "./CoffeeImgs/Colombia03.png";
-import CostaRica01 from "./CoffeeImgs/CostaRica01.png";
-import CostaRica02 from "./CoffeeImgs/CostaRica02.png";
-import CostaRica03 from "./CoffeeImgs/CostaRica03.png";
-import Ethiopia01 from "./CoffeeImgs/Ethiopia01.png";
-import Ethiopia02 from "./CoffeeImgs/Ethiopia02.png";
-import Ethiopia03 from "./CoffeeImgs/Ethiopia03.png";
-import Indonesia01 from "./CoffeeImgs/Indonesia01.png";
-import Indonesia02 from "./CoffeeImgs/Indonesia02.png";
-import Indonesia03 from "./CoffeeImgs/Indonesia03.png";
-import Kenya01 from "./CoffeeImgs/Kenya01.png";
-import Kenya02 from "./CoffeeImgs/Kenya02.png";
-import Kenya03 from "./CoffeeImgs/Kenya03.png";
-import Thailand01 from "./CoffeeImgs/Thailand01.png";
-import Thailand02 from "./CoffeeImgs/Thailand02.png";
-import Thailand03 from "./CoffeeImgs/Thailand03.png";
-import Vietnam01 from "./CoffeeImgs/Vietnam01.png";
-import Vietnam02 from "./CoffeeImgs/Vietnam02.png";
-import Vietnam03 from "./CoffeeImgs/Vietnam03.png";
+import centralamerica from "./Countries/Central_America_blank_map.svg";
 
 export const regions = [
   {
@@ -50,5 +24,11 @@ export const regions = [
     image: southamerica,
     title: "SouthAmerica",
     info: "A coffee tree presented to Louis XIV by the Dutch in 1715 and nurtured in Paris's Royal Botanical Garden would make an indelible mark on coffee's history with the help of a resolute French naval officer. On leave from Martinique in 1720, Gabriel Mathieu de Clieu was convinced that Martinique could become as successful a coffee producer as Java. When his request for a coffee plant grown from the king's noble tree was summarily denied, de Clieu staged a late night raid on the Royal Garden to secure one of the plants himself. Although de Clieu's daring effort was successful, it actually proved less harrowing than his perilous transatlantic return to Martinique, as he was compelled to share his meager water rations with the fledgling tree. But within 50 years of the plant's arrival on Martinique, de Clieu's heroics literally bore fruit. The confiscated plant yielded over 18,000 coffee trees. Much of the world's coffee, including the majority of the coffee destined for cultivation in the Americas, is descended from that single tree.",
+  },
+  {
+    id: 4,
+    image: centralamerica,
+    title: "CentralAmerica",
+    info: "Meanwhile, over the course of the eighteenth century, the coffee plant (Coffea arabica) arrived in the Caribbean. Coffee is not native to the Western Hemisphere, having evolved in the highlands of Ethiopia. A coffee shrub arrived in the French sugar colony of Martinique in the early 1720s, and French colonists planted coffee trees across the island sugar colonies. By the 1780s, the French colony of Haiti—then the richest European colony in the Americas—was supplying half the world’s coffee. The importance of the coffee trade to the French empire and the intolerable conditions of coffee plantations in Haiti directly contributed to the Haitian Revolution of the 1790s, the only successful revolt by enslaved people in the hemisphere. In the years leading up to the Haitian Revolution, coffee plants in the French Caribbean were brought to the mainland and planted in Mexico, Costa Rica, and Nicaragua. These were the genetic ancestors of today’s Central American coffees.",
   },
 ];

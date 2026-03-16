@@ -31,9 +31,9 @@ export const useFavorites = () => {
 
   const { data: favoritesData, isLoading } = useQuery<FavoriteResponse>({
     queryKey: ["favorites"],
-    queryFn: getFavoritesService,
+    queryFn: () => getFavoritesService(),
     enabled: !!user,
-    staleTime: 1000 * 60,
+    staleTime: 1000 * 60, // 1 minute
   });
 
   /*
